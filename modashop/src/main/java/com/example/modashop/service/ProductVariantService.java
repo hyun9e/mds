@@ -19,7 +19,7 @@ public class ProductVariantService {
 
     public ProductVariant getVariantById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Product Variant", id));
+                .orElseThrow(() -> new EntityNotFoundException(ProductVariant.class, id));
     }
 
     public List<ProductVariant> getVariantsByProduct(Long productId) {
@@ -39,12 +39,12 @@ public class ProductVariantService {
                     variant.setProduct(newVariant.getProduct());
                     return repository.save(variant);
                 })
-                .orElseThrow(() -> new EntityNotFoundException("Product Variant", id));
+                .orElseThrow(() -> new EntityNotFoundException(ProductVariant.class, id));
     }
 
     public String deleteVariant(Long id) {
         if (!repository.existsById(id)) {
-            throw new EntityNotFoundException("Product Variant", id);
+            throw new EntityNotFoundException(ProductVariant.class, id);
         }
         repository.deleteById(id);
         return "Product variant with id " + id + " has been deleted";

@@ -19,7 +19,7 @@ public class OrderService {
 
     public Order getOrderById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Product", id));
+                .orElseThrow(() -> new EntityNotFoundException(Order.class, id));
     }
 
     public List<Order> getOrdersByUser(Long userId) {
@@ -38,12 +38,12 @@ public class OrderService {
                     order.setShippingAddress(newOrder.getShippingAddress());
                     return repository.save(order);
                 })
-                .orElseThrow(() -> new EntityNotFoundException("Order", id));
+                .orElseThrow(() -> new EntityNotFoundException(Order.class, id));
     }
 
     public String deleteOrder(Long id) {
         if (!repository.existsById(id)) {
-            throw new EntityNotFoundException("Order", id);
+            throw new EntityNotFoundException(Order.class, id);
         }
         repository.deleteById(id);
         return "Order with id " + id + " has been deleted";

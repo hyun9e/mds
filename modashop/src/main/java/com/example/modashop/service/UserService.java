@@ -34,18 +34,18 @@ public class UserService {
                     user.setPhone(newUser.getPhone());
                     return repository.save(user);
                 })
-                .orElseThrow( () -> new EntityNotFoundException("Product", id));
+                .orElseThrow( () -> new EntityNotFoundException(User.class, id));
     }
 
     public String deleteUser(@PathVariable Long id){
         if(!repository.existsById(id))
-            throw new EntityNotFoundException("User", id);
+            throw new EntityNotFoundException(User.class, id);
         repository.deleteById(id);
         return "User with id "+ id +" has been deleted";
     }
 
     public User getUserById(Long id) {
         return repository.findById(id)
-                .orElseThrow( () -> new EntityNotFoundException("Product", id));
+                .orElseThrow( () -> new EntityNotFoundException(User.class, id));
     }
 }

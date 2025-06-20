@@ -19,7 +19,7 @@ public class OrderItemService {
 
     public OrderItem getOrderItemById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Order item", id));
+                .orElseThrow(() -> new EntityNotFoundException(OrderItem.class, id));
     }
 
     public List<OrderItem> getOrderItemsByOrder(Long orderId) {
@@ -39,12 +39,12 @@ public class OrderItemService {
                     orderItem.setVariant(newOrderItem.getVariant());
                     return repository.save(orderItem);
                 })
-                .orElseThrow(() -> new EntityNotFoundException("Order item", id));
+                .orElseThrow(() -> new EntityNotFoundException(OrderItem.class, id));
     }
 
     public String deleteOrderItem(Long id) {
         if (!repository.existsById(id)) {
-            throw new EntityNotFoundException("Order item", id);
+            throw new EntityNotFoundException(OrderItem.class, id);
         }
         repository.deleteById(id);
         return "Order item with id " + id + " has been deleted";

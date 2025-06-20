@@ -1,5 +1,6 @@
 package com.example.modashop.controller;
 
+import com.example.modashop.dto.ProductDTO;
 import com.example.modashop.entity.Product;
 import com.example.modashop.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -24,14 +25,23 @@ public class ProductController {
         return service.getProductById(id);
     }
 
+    // @PostMapping
+    // public Product createProduct(@RequestBody Product product) {
+    //     return service.createProduct(product);
+    // }
+    // @PutMapping("/{id}")
+    // public Product updateProduct(@RequestBody Product product, @PathVariable Long id) {
+    //     return service.updateProduct(product, id);
+    // }
+
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        return service.createProduct(product);
+    public Product createProduct(@RequestBody ProductDTO productDTO) {
+        return service.createProduct(productDTO);
     }
 
     @PutMapping("/{id}")
-    public Product updateProduct(@RequestBody Product product, @PathVariable Long id) {
-        return service.updateProduct(product, id);
+    public Product updateProduct(@RequestBody ProductDTO productDTO, @PathVariable Long id) {
+        return service.updateProduct(productDTO, id);
     }
 
     @DeleteMapping("/{id}")

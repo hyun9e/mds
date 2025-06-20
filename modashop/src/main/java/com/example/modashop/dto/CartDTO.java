@@ -1,15 +1,19 @@
 package com.example.modashop.dto;
 
+import com.example.modashop.entity.CartItem;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderItemDTO {
+public class CartDTO {
     private Long id;
-    private int quantity;
-    private double unitPrice;
-    private Long productVariantId;
+    private Long userId;
+    private List<CartItemDTO> items;
 }
